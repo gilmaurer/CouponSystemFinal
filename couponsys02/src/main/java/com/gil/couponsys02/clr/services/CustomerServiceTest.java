@@ -21,7 +21,7 @@ import com.gil.couponsys02.utils.PrintUtils;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+//@Component
 @Order(4)
 @RequiredArgsConstructor
 public class CustomerServiceTest implements CommandLineRunner {

@@ -2,6 +2,9 @@ package com.gil.couponsys02.services;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gil.couponsys02.beans.Company;
@@ -13,12 +16,16 @@ import com.gil.couponsys02.exceptions.ErrorsMessages;
 import com.gil.couponsys02.exceptions.InvalidDataException;
 import com.gil.couponsys02.exceptions.UnauthorizedAccessException;
 import com.gil.couponsys02.login.ClientType;
+import com.gil.couponsys02.login.LoginCacheManager;
 
 @Service
 public class AdminServiceImpl extends ClientService implements AdminService {
 
 	private static final String ADMIN_EMAIL = "admin@admin.com";
 	private static final String ADMIN_PASSWORD = "admin";
+	
+	@Autowired
+	private LoginCacheManager loginCacheManager;
 
 	@Override
 	public ClientService login(String email, String password) throws UnauthorizedAccessException {
@@ -59,6 +66,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 		}
 		this.couponRepository.deleteCouponsFromCustomersCouponsByCompanyId(companyId);
 		this.companyRepository.deleteById(companyId);
+		loginCacheManager.removeService(ClientType.COMPANY.name()+companyId);
 
 	}
 
@@ -101,6 +109,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 			throw new DataNotFoundException(ErrorsMessages.NOT_FOUND_BY_ID, Customer.class.getSimpleName(), customerId);
 		}
 		this.customerRepository.deleteById(customerId);
+		loginCacheManager.removeService(ClientType.CUSTOMER.name()+customerId);
 
 	}
 

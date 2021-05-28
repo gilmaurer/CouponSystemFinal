@@ -16,6 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	boolean existsByEmail(String email);
 	boolean existsByEmailAndIdIsNot(String email, int id);
 	Customer findByEmailAndPassword(String email, String password);
+	Customer findByEmail(String email);
 
 	@Transactional
 	@Modifying

@@ -26,7 +26,7 @@ import com.gil.couponsys02.utils.PrintUtils;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+//@Component
 @Order(3)
 @RequiredArgsConstructor
 public class CompanyServiceTest implements CommandLineRunner {
@@ -76,7 +76,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 			print.result("Added new Coupon to logged in company: " + CompanyDummy.APPLE.name());
 			Coupon coupon = getCoupon(CouponDummy.COUPON_TEST);  
 			companyService.addCoupon(coupon);
-			print.printTable(Arrays.asList(companyService.getCompanyDetails()), Company.class);
+			print.printTable(Arrays.asList(companyService.companyDetails()), Company.class);
 			print.printTable(adminService.getAllCoupons(), Coupon.class);
 			
 			print.testTitle("Add Coupon", false, ++testNumber);
@@ -94,7 +94,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 	private void updateCouponTest() {
 		try {
 			print.testTitle("Update Coupon", true, ++testNumber);
-			Coupon toUpdate = companyService.getCompanyCoupons().get(0);
+			Coupon toUpdate = companyService.companyCoupons().get(0);
 			print.result("The following values of coupon id " + toUpdate.getId() + " will be update: \n"
 					+ "Amount: " + toUpdate.getAmount() + ", Price: " + toUpdate.getPrice() + ", Description: "
 					+ toUpdate.getDescription());
@@ -117,7 +117,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 	private void updateCompanyIdException() {
 		try {
 			print.testTitle("Update Coupon", false, ++testNumber);
-			Coupon toUpdate = companyService.getCompanyCoupons().get(0);
+			Coupon toUpdate = companyService.companyCoupons().get(0);
 			print.result("Update company of coupon id " + toUpdate.getId() + " will fail");
 			toUpdate.setCompany(adminService.getOneCompany(3));
 			companyService.updateCoupon(toUpdate);
@@ -130,11 +130,11 @@ public class CompanyServiceTest implements CommandLineRunner {
 	private void titleReplacedException() {
 		try {
 			print.testTitle("Update Coupon", false, ++testNumber);
-			Coupon toUpdate = companyService.getCompanyCoupons().get(0);
+			Coupon toUpdate = companyService.companyCoupons().get(0);
 			print.result("Update title of coupon id " + toUpdate.getId()
 			+ " will fail");
 			
-			toUpdate.setTitle(companyService.getCompanyCoupons().get(1).getTitle());
+			toUpdate.setTitle(companyService.companyCoupons().get(1).getTitle());
 			companyService.updateCoupon(toUpdate);
 			
 		} catch (Exception e) {
@@ -166,7 +166,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 		try {
 			print.testTitle("Get All Company's Coupons", true, ++testNumber);
 			print.result("Get only coupons that belong to logged in company [id: " + companyId + "]");
-			print.printTable(companyService.getCompanyCoupons(), Coupon.class);
+			print.printTable(companyService.companyCoupons(), Coupon.class);
 		} catch(Exception e) {
 			exceptionHandler.handle(e);
 		}
@@ -202,7 +202,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 		try {
 			print.testTitle("Get Company Details", true, ++testNumber);
 			print.result("Get Details of logged in company [" + companyId + "]");
-			print.printTable(Arrays.asList(companyService.getCompanyDetails()), Company.class);
+			print.printTable(Arrays.asList(companyService.companyDetails()), Company.class);
 		} catch(Exception e) {
 			exceptionHandler.handle(e);
 		}
@@ -210,7 +210,7 @@ public class CompanyServiceTest implements CommandLineRunner {
 	}
 	
 	private Coupon getCoupon(CouponDummy dummy) throws DataNotFoundException {
-		Company company = this.companyService.getCompanyDetails();
+		Company company = this.companyService.companyDetails();
 		Category category = Category.values()[dummy.getCategoryId()];
 		String title = category.getTitle(dummy.getTitle());
 		String description = company.getName() + " " + title;

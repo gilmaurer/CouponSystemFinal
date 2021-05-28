@@ -1,5 +1,7 @@
 package com.gil.couponsys02.repos;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,11 +14,6 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
 	boolean existsByEmailAndIdIsNot(String email, int id);
 	Company findByEmailAndPassword(String email, String password);
 	Company getIdByEmailAndPassword(String email, String password);
-	
-	
-//	@Query(value="SELECT EXISTS(SELECT * FROM couponsystemspring.companies WHERE email=:email and id<>:id );"
-//			, nativeQuery = true)
-//	int alreadyEmailExists(
-//			@Param("email") String email,
-//			@Param("id") Integer id);
+	Company findByEmail(String email);
+
 }	

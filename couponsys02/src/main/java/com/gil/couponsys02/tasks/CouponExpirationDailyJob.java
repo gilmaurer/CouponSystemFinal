@@ -13,7 +13,7 @@ import com.gil.couponsys02.utils.PrintUtils;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class CouponExpirationDailyJob {
 	

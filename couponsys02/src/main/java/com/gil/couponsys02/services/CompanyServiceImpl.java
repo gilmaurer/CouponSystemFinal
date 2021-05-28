@@ -2,6 +2,7 @@ package com.gil.couponsys02.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ import com.gil.couponsys02.exceptions.ErrorsMessages;
 import com.gil.couponsys02.exceptions.InvalidDataException;
 import com.gil.couponsys02.exceptions.UnauthorizedAccessException;
 import com.gil.couponsys02.login.ClientType;
+import com.gil.couponsys02.login.LoginCacheManager;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Service
 @Scope("prototype")
@@ -32,7 +37,10 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 	}
 
 	@Override
-	public void addCoupon(Coupon coupon) throws AlreadyInUseException {
+	public void addCoupon(Coupon coupon) throws AlreadyInUseException, InvalidDataException {
+		if(coupon.getCompany().getId() != comapnyId) {
+			throw new InvalidDataException(ErrorsMessages.WORNG_COMPANY_ID, coupon.getCompany().getId());
+		}
 		if (this.couponRepository.existsByCompanyIdAndTitle(coupon.getCompany().getId(), coupon.getTitle())) {
 			throw new AlreadyInUseException(ErrorsMessages.COUPON_TITLE_ALREADY_IN_USE_BY_COMPANY,
 					coupon.getCompany().getId(), coupon.getTitle());
@@ -42,6 +50,9 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 
 	@Override
 	public void updateCoupon(Coupon coupon) throws InvalidDataException, AlreadyInUseException {
+		if(coupon.getCompany().getId() != comapnyId) {
+			throw new InvalidDataException(ErrorsMessages.WORNG_COMPANY_ID, coupon.getCompany().getId());
+		}
 		if (!this.couponRepository.existsByIdAndCompanyId(coupon.getId(), coupon.getCompany().getId())) {
 			throw new InvalidDataException(ErrorsMessages.COMPANY_REPLACED, coupon.getId());
 		}
@@ -61,11 +72,10 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 		}
 		this.couponRepository.deleteCouponsFromCustomersCouponsByCouponId(couponId);
 		this.couponRepository.deleteById(couponId);
-
 	}
 
 	@Override
-	public List<Coupon> getCompanyCoupons() {
+	public List<Coupon> companyCoupons() {
 		return this.couponRepository.findByCompanyId(comapnyId);
 	}
 
@@ -80,7 +90,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 	}
 
 	@Override
-	public Company getCompanyDetails() throws DataNotFoundException  {
+	public Company companyDetails() throws DataNotFoundException  {
 		return this.companyRepository.findById(comapnyId).orElseThrow(() -> new DataNotFoundException(ErrorsMessages.NOT_FOUND_BY_ID,
 				Company.class.getSimpleName(), comapnyId));
 

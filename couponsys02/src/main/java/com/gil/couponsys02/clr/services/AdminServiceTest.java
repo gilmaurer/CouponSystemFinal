@@ -23,7 +23,7 @@ import com.gil.couponsys02.utils.PrintUtils;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+//@Component
 @Order(2)
 @RequiredArgsConstructor
 public class AdminServiceTest implements CommandLineRunner {

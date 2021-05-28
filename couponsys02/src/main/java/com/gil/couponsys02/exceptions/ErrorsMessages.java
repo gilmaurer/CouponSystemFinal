@@ -13,7 +13,8 @@ public enum ErrorsMessages {
 	COUPON_NOT_FOUND("No Coupon named %s belong to comapny with id %d was found"),
 	COUPON_NOT_FOUND_BY_ID("No coupon belong to company %d was found with coupon id %d"),
 	NO_COUPONS_LEFT("Coupon %d is out of stock"),
-	COUPON_EXPIRED("Coupon %d is expired");
+	COUPON_EXPIRED("Coupon %d is expired"),
+	WORNG_COMPANY_ID("Adding or Update Coupon of other Company (%d) is NOT allowed");
 	
 	private String message;
 

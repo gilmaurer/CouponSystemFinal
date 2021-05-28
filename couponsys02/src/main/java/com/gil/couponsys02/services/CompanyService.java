@@ -10,12 +10,14 @@ import com.gil.couponsys02.exceptions.DataNotFoundException;
 import com.gil.couponsys02.exceptions.InvalidDataException;
 
 public interface CompanyService {
-	void addCoupon(Coupon coupon) throws AlreadyInUseException;
+	void addCoupon(Coupon coupon) throws AlreadyInUseException, InvalidDataException;
 	void updateCoupon(Coupon coupon) throws InvalidDataException, AlreadyInUseException;
 	void deleteCoupon(int couponId) throws DataNotFoundException;
-	List<Coupon> getCompanyCoupons();
+	List<Coupon> companyCoupons();
+	//List<Coupon> getCompanyCoupons();
 	List<Coupon> getCompanyCoupons(Category category);
 	List<Coupon> getCompanyCoupons(double maxPrice);
-	Company getCompanyDetails() throws DataNotFoundException ;
+	Company companyDetails() throws DataNotFoundException ;
+	//Company getCompanyDetails() throws DataNotFoundException ;
 	
 }

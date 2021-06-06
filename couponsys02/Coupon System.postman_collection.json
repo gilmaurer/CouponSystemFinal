@@ -1,0 +1,891 @@
+{
+	"info": {
+		"_postman_id": "2da7e1c8-138b-4056-ae72-ee80daeee149",
+		"name": "Coupon System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin Controller",
+			"item": [
+				{
+					"name": "Add Company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"name\": \"App\",\r\n        \"email\": \"JB@JB.com\",\r\n        \"password\": \"justdoit\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/admin/companies",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 10,\r\n        \"firstName\": \"Dana\",\r\n        \"lastName\": \"Sobelmann\",\r\n        \"email\": \"@sobelmann.com\",\r\n        \"password\": \"danasobelpassnew\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/admin/customers",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 1,\r\n        \"name\": \"DDDD\",\r\n        \"email\": \"apple@apple.com\",\r\n        \"password\": \"1234\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/admin/companies",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/admin/companies/700",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"companies",
+								"700"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/admin/customers/600",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"customers",
+								"600"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/admin/customers/1",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one Company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/admin/companies/1",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"companies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"admin_token\", pm.response.json().jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin@admin.com\",\r\n    \"password\": \"admin\",\r\n    \"clientType\": \"ADMINISTRATOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/login",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Coupons",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "5874369e-4d98-428a-aa2d-e8bac7b57891"
+							}
+						],
+						"url": {
+							"raw": "{{cs_url}}/admin/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "5874369e-4d98-428a-aa2d-e8bac7b57891"
+							}
+						],
+						"url": {
+							"raw": "{{cs_url}}/admin/customers",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Companies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "5874369e-4d98-428a-aa2d-e8bac7b57891",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{cs_url}}/admin/companies",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"firstName\": \"Kobi\",\r\n        \"lastName\": \"Shasha\",\r\n        \"email\": \"kobi@shasha.com\",\r\n        \"password\": \"1234567\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/admin/customers",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"admin",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company Controller",
+			"item": [
+				{
+					"name": "Add Coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"company\": 4,\r\n        \"category\": \"FOOD\",\r\n        \"title\": \"EEEEE\",\r\n        \"description\": \"dsdsd Fast Food\",\r\n        \"startDate\": \"2021-04-19\",\r\n        \"endDate\": \"2022-04-19\",\r\n        \"amount\": 11,\r\n        \"price\": 53.99,\r\n        \"image\": \"APPLEFastFood.jpg\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/company/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"company\": 1,\r\n        \"category\": \"FOOD\",\r\n        \"title\": \"NEW TITLE\",\r\n        \"description\": \"APPLE Fast Food\",\r\n        \"startDate\": \"2021-04-19\",\r\n        \"endDate\": \"2022-04-19\",\r\n        \"amount\": 11,\r\n        \"price\": 53.99,\r\n        \"image\": \"APPLEFastFood.jpg\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/company/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Coupon by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/company/coupons/456",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons",
+								"456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Coupons By Max Price",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/company/coupons/maxprice?maxPrice=24",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons",
+								"maxprice"
+							],
+							"query": [
+								{
+									"key": "maxPrice",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Coupons By Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/company/coupons/category?category=FOOD",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons",
+								"category"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "FOOD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/company",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Coupons",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{company_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/company/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"company",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"company_token\", pm.response.json().jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"apple@apple.com\",\r\n    \"password\": \"hailstevejobs\",\r\n    \"clientType\": \"COMPANY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/login",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer Controller",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"customer_token\", pm.response.json().jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"gil@maurer.com\",\r\n    \"password\": \"gilmaupass\",\r\n    \"clientType\": \"CUSTOMER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/login",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Coupons",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/customer/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"customer",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/customer",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Coupons By Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/customer/coupons/category?category=FOOD",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"customer",
+								"coupons",
+								"category"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "FOOD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Coupons By Max Price",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cs_url}}/customer/coupons/maxprice?maxPrice=155",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"customer",
+								"coupons",
+								"maxprice"
+							],
+							"query": [
+								{
+									"key": "maxPrice",
+									"value": "155"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase Coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 9,\r\n        \"company\": 5,\r\n        \"category\": \"VACATION\",\r\n        \"title\": \"Spa\",\r\n        \"description\": \"ALIEXPRESS Spa\",\r\n        \"startDate\": \"2020-10-05\",\r\n        \"endDate\": \"2021-10-05\",\r\n        \"amount\": 25,\r\n        \"price\": 42.99,\r\n        \"image\": \"ALIEXPRESSSpa.jpg\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cs_url}}/customer/coupons",
+							"host": [
+								"{{cs_url}}"
+							],
+							"path": [
+								"customer",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
